@@ -1,9 +1,16 @@
 {
-  "nonPerishables": [],
-  "perishables": [
+  "food": [
     {
       "title": "Rice",
-      "expDate": "10/2/2019"
+      "expDate": "10/21/19",
+      "category": "perishables",
+      "id": "UdSlK8pJQ4k"
+    },
+    {
+      "title": "Rice",
+      "expDate": "10/21/19",
+      "category": "perishables",
+      "id": "AlXBUVHWxWe"
     }
   ]
 }

@@ -3,6 +3,8 @@ const app = express();
 const cors = require('cors');
 const port = 8080;
 
+const nanoid = require('nanoid');
+
 const db = require('./db');
 
 // Setup express to support serving static content from this directory.
@@ -18,13 +20,26 @@ app.get('/food', (req, res, next) => {
     res.json(db.value());
 });
 
-// On a put request, add the new itme to the correct category, with the title and expDate.
+// On a put request, add the new itme to the correct category, with the title, expDate, id.
 app.put('/food', (req, res, next) => {
-    res.send(`post sent with data: ${req.query.title}`);
-    db.get('perishables')
+    res.json(req.query);
+
+    db.get('food')
         .push({
             title: req.query.title,
             expDate: req.query.expDate,
+            category: req.query.category,
+            id: nanoid(11),
+        })
+        .write();
+});
+
+// Delete the food item with the given id
+app.delete('/food', (req, res, next) => {
+    res.send(`Deleted item with id: ${req.query.id}`);
+    db.get('food')
+        .remove({
+            id: req.query.id,
         })
         .write();
 });
