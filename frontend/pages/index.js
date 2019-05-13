@@ -1,6 +1,11 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import ListCard from "../components/ListCard";
+import Page from "../components/Page";
+
+import { PageHeader, PageDescription } from "../components/Typography";
+
+import Link from "next/link";
 
 const App = () => {
     const [foodData, setFoodData] = useState({
@@ -14,44 +19,22 @@ const App = () => {
             // Grab the food database, convert it to json.
             // TODO: Change this IP to match the machine running the server
             const foodDB = await fetch("http://192.168.50.150:8080/food");
-            const foodList = await foodDB.json();
+            const foodJson = await foodDB.json();
 
             // Update the state by first spreading the current state and adding on the new state changes.
-            setFoodData(foodList);
+            setFoodData(foodJson);
         }
         fetchData();
     }, []);
 
     return (
         <Page>
-            <style jsx global>{`
-                @import url("https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700");
-                body {
-                    margin: 0;
-                    padding: 0;
-                    height: 100%;
-                    position: relative;
-                    background: #fff;
-                    color: white;
-                }
-                body * {
-                    box-sizing: border-box;
-                    font-family: "Montserrat", sans-serif;
-                }
-                h1,
-                h2,
-                h3,
-                h4,
-                h5,
-                h6,
-                p {
-                    padding: 0;
-                    margin: 0;
-                }
-            `}</style>
-            <AppTitle>
-                <span>Smart</span> Fridge
-            </AppTitle>
+            <PageHeader>Foods</PageHeader>
+            <PageDescription>
+                Keep track of what is in your kitchen! Never forget when food
+                expires, and get rid of those “what do we have to eat” questions
+                for good.
+            </PageDescription>
             <ListContainer>
                 <ListCard
                     title="Non-perishables"
@@ -64,36 +47,39 @@ const App = () => {
                     kind="perishables"
                 />
             </ListContainer>
+            <Link href="/add">
+                <FloatingActionButton>+</FloatingActionButton>
+            </Link>
         </Page>
     );
 };
-
-const Page = styled.div`
-    --blue-color: #335ece;
-    --red-color: #ca3d3d;
-
-    height: 100%;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    max-width: 1100px;
-    padding: 32px;
-`;
 
 const ListContainer = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 32px;
+    margin-top: 32px;
 `;
 
-const AppTitle = styled.h1`
-    font-size: 36px;
-    margin-bottom: 50px;
-    margin-top: 8px;
-    font-weight: 400;
-    color: #1e1e1e;
-    > span {
-        font-weight: 700;
+const FloatingActionButton = styled.a`
+    position: absolute;
+    bottom: 64px;
+    align-self: flex-end;
+    margin-top: 150px;
+    width: 64px;
+    height: 64px;
+    background: var(--accent-color);
+    color: var(--white-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+    cursor: pointer;
+    transition: all 0.3s;
+
+    &:hover {
+        background: var(--dark-blue-color);
+        color: white;
     }
 `;
 

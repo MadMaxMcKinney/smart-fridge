@@ -6,7 +6,8 @@ const adapter = new FileSync('db.json');
 const db = low(adapter);
 
 db.defaults({
-    food: [],
+    perishables: [],
+    nonPerishables: [],
 }).write();
 
 module.exports = db;

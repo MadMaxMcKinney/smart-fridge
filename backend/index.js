@@ -20,18 +20,37 @@ app.get('/food', (req, res, next) => {
     res.json(db.value());
 });
 
-// On a put request, add the new itme to the correct category, with the title, expDate, id.
+// On a put request, add the new itme to the correct category (perishables, nonPerishables), with the title, expDate, id.
+// If the category doesn't match the existing ones, return a 404.
 app.put('/food', (req, res, next) => {
-    res.json(req.query);
+    const { title, expDate, category } = req.query;
 
-    db.get('food')
-        .push({
-            title: req.query.title,
-            expDate: req.query.expDate,
-            category: req.query.category,
-            id: nanoid(11),
-        })
-        .write();
+    if (category === 'perishables') {
+        db.get('perishables')
+            .push({
+                title: title,
+                expDate: expDate,
+                category: category,
+                id: nanoid(11),
+            })
+            .write();
+        res.send(`Successfully added: ${title} in ${category}`);
+    } else if (category === 'nonPerishables') {
+        db.get('nonPerishables')
+            .push({
+                title: title,
+                expDate: expDate,
+                category: category,
+                id: nanoid(11),
+            })
+            .write();
+        res.sendStatus(200);
+        res.send(`Successfully added: ${title} in ${category}`);
+    } else {
+        res.status(404).send(
+            `404 Error: Could not add item ${title} because ${category} category does not exist`
+        );
+    }
 });
 
 // Delete the food item with the given id
