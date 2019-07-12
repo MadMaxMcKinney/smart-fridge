@@ -9,6 +9,7 @@ const Input = styled.input`
     width: 100%;
     max-width: 400px;
     padding: 8px;
+    height: 48px;
     font-size: 14px;
     transition: all 0.3s;
 

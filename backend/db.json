@@ -1,23 +1,30 @@
 {
   "perishables": [
     {
-      "title": "Rice",
-      "expDate": "10/2/2019",
-      "category": "perishables",
-      "id": "3-_BD6Wi5Gg"
-    },
-    {
-      "title": "Rice",
-      "expDate": "10/2/2019",
-      "category": "perishables",
-      "id": "owujI1VsAJ0"
-    },
-    {
       "title": "Bread",
-      "expDate": "5/10/2019",
+      "expDate": "7/15/2019",
       "category": "perishables",
-      "id": "C7M-ZD3bGXc"
+      "id": "1cl9NXnSVXC"
+    },
+    {
+      "title": "Eggs",
+      "expDate": "8/1/2019",
+      "category": "perishables",
+      "id": "byiECuiDzvU"
+    },
+    {
+      "title": "Test 3",
+      "expDate": "10/1/2019",
+      "category": "perishables",
+      "id": "6PYVUXGXF1X"
     }
   ],
-  "nonPerishables": []
+  "nonPerishables": [
+    {
+      "title": "Test 1",
+      "expDate": "9/2/2019",
+      "category": "nonPerishables",
+      "id": "7HzfxhCJ5gs"
+    }
+  ]
 }

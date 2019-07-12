@@ -1,31 +1,17 @@
-import { useState, useEffect } from "react";
+import { useContext } from "react";
 import styled from "styled-components";
 import ListCard from "../components/ListCard";
 import Page from "../components/Page";
+import Config from "../../config.json";
+import { FoodContext } from "../context/FoodContext";
 
 import { PageHeader, PageDescription } from "../components/Typography";
 
 import Link from "next/link";
 
-const App = () => {
-    const [foodData, setFoodData] = useState({
-        nonPerishables: [],
-        perishables: []
-    });
-
-    useEffect(() => {
-        // Fetch the data in a seperate internal function. Part of the rules when using useEffect.
-        async function fetchData() {
-            // Grab the food database, convert it to json.
-            // TODO: Change this IP to match the machine running the server
-            const foodDB = await fetch("http://192.168.50.150:8080/food");
-            const foodJson = await foodDB.json();
-
-            // Update the state by first spreading the current state and adding on the new state changes.
-            setFoodData(foodJson);
-        }
-        fetchData();
-    }, []);
+const HomePage = () => {
+    // Get the foodList from the food context
+    const [foodList, addFoodItem, deleteFoodItem] = useContext(FoodContext);
 
     return (
         <Page>
@@ -38,12 +24,12 @@ const App = () => {
             <ListContainer>
                 <ListCard
                     title="Non-perishables"
-                    data={foodData.nonPerishables}
+                    data={foodList.nonPerishables}
                     kind="nonPerishables"
                 />
                 <ListCard
                     title="Perishables"
-                    data={foodData.perishables}
+                    data={foodList.perishables}
                     kind="perishables"
                 />
             </ListContainer>
@@ -83,4 +69,4 @@ const FloatingActionButton = styled.a`
     }
 `;
 
-export default App;
+export default HomePage;

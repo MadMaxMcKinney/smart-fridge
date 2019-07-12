@@ -1,23 +1,45 @@
 import styled from "styled-components";
-
+import { useState, useContext } from 'react';
+import {useRouter} from 'next/router';
 import Page from "../components/Page";
 import Select from "react-select";
 import Input from "../components/forms/Input";
 import selectStyles from "../components/forms/Select";
-
 import Button from "../components/Button";
 import { PageHeader, PageDescription, Label } from "../components/Typography";
-
-const foodTypes = [
-    { value: "perishable", label: "Perishable" },
-    { value: "nonPerishable", label: "Non-Perishable" }
-];
-
-const addItem = () => {};
-
-const validateForm = () => {};
+import {FoodContext} from '../context/FoodContext';
 
 const AddPage = () => {
+
+    const [name, setName] = useState();
+    const [expirationDate, setExpirationDate] = useState();
+    const [category, setCategory] = useState();
+    const router = useRouter();
+    const [foodList, addFoodItem, deleteFoodItem] = useContext(FoodContext);
+
+    // The new item object that stores the current value of all of the state items
+    let newItem = {
+        title: name,
+        expDate: expirationDate,
+        category: category
+    }
+
+    const foodTypes = [
+        { value: "perishables", label: "Perishable" },
+        { value: "nonPerishables", label: "Non-Perishable" }
+    ];
+
+    const validateForm = () => {};
+
+    /**
+     * Adds a new food item via food context and changes back to the home page
+     *
+     */
+    const handleAddItem = async () => {
+        await addFoodItem(newItem);
+        router.push('/');
+    }
+
     return (
         <Page>
             <PageHeader>New Item</PageHeader>
@@ -26,19 +48,20 @@ const AddPage = () => {
             </PageDescription>
             <AddForm>
                 <Label>Food Name</Label>
-                <Input placeholder="Name" />
+                <Input placeholder="Name" onChange={(e) => setName(e.target.value)}/>
 
                 <Label>Expiration Date</Label>
-                <Input placeholder="0/0/0" />
+                <Input placeholder="0/0/0" onChange={(e) => setExpirationDate(e.target.value)}/>
 
                 <Label>Food Type</Label>
                 <Select
                     options={foodTypes}
                     styles={selectStyles}
                     isSearchable={false}
+                    onChange={(e) => setCategory(e.value)}
                 />
 
-                <Button onClick={addItem}>Add Item</Button>
+                <Button onClick={() => handleAddItem()}>Add Item</Button>
             </AddForm>
         </Page>
     );

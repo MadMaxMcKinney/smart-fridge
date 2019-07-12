@@ -1,30 +1,25 @@
 import styled from "styled-components";
 import propTypes from "prop-types";
+import ListItem from './ListItem';
 
-import moment from "moment";
+const ListCard = props => {
 
-const ListCard = props => (
-    <ListCardContainer>
-        <ListHeader kind={props.kind}>
-            <ListHeaderTitle>{props.title}</ListHeaderTitle>
-        </ListHeader>
-        <ListContent>
-            {props.data.length > 0 &&
-                props.data.map(foodItem => {
-                    return (
-                        <ListItem key={foodItem.id}>
-                            <ListItemName>{foodItem.title}</ListItemName>
-                            <ListItemDate>
-                                {moment(foodItem.expDate)
-                                    .endOf("day")
-                                    .fromNow()}
-                            </ListItemDate>
-                        </ListItem>
-                    );
-                })}
-        </ListContent>
-    </ListCardContainer>
-);
+    return(
+        <ListCardContainer>
+            <ListCardHeader kind={props.kind}>
+                <ListHeaderTitle>{props.title}</ListHeaderTitle>
+            </ListCardHeader>
+            <ListCardContent>
+                {props.data.length > 0 &&
+                    props.data.map(foodItem => {
+                        return (
+                            <ListItem key={foodItem.id} title={foodItem.title} expDate={foodItem.expDate} id={foodItem.id}/>
+                        );
+                    })}
+            </ListCardContent>
+        </ListCardContainer>
+    )
+};
 
 const ListCardContainer = styled.div`
     display: flex;
@@ -36,12 +31,12 @@ const ListCardContainer = styled.div`
     overflow: hidden;
 `;
 
-const ListHeader = styled.div`
+const ListCardHeader = styled.div`
     padding-top: 40px;
     padding-left: 24px;
     background-color: ${props =>
-        (props.kind === "perishables" && "var(--accent-color)") ||
-        (props.kind === "nonPerishables" && "var(--red-color)")};
+        (props.kind === "perishables" && "var(--red-color)") ||
+        (props.kind === "nonPerishables" && "var(--accent-color)")};
 `;
 
 const ListHeaderTitle = styled.h1`
@@ -50,22 +45,11 @@ const ListHeaderTitle = styled.h1`
     padding-bottom: 16px;
 `;
 
-const ListContent = styled.div`
+const ListCardContent = styled.div`
     padding: 24px;
     display: flex;
     flex-direction: column;
 `;
-
-const ListItem = styled.div`
-    width: 100%;
-    padding-bottom: 4px;
-    display: flex;
-    justify-content: space-between;
-`;
-
-const ListItemName = styled.p``;
-
-const ListItemDate = styled.p``;
 
 ListCard.propTypes = {
     title: propTypes.string,

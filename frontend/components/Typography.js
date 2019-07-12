@@ -11,7 +11,7 @@ export const PageDescription = styled.p`
 `;
 
 export const Label = styled.h6`
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
     margin-bottom: 16px;
 `;

@@ -5,7 +5,7 @@ const Button = styled.a`
     display: flex;
     background: var(--accent-color);
     color: var(--white-color);
-    font-size: 14px;
+    font-size: 16px;
     text-decoration: none;
     width: fit-content;
     cursor: pointer;

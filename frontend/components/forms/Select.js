@@ -8,6 +8,7 @@ const selectStyles = {
         ...provided,
         background: "var(--light-blue-color)",
         borderRadius: "2px",
+        height: "48px",
         borderColor: state.isFocused ? "var(--accent-color)" : "transparent",
         boxShadow: "none",
         "&:hover": {
@@ -18,6 +19,7 @@ const selectStyles = {
         ...provided,
         background: "transparent",
         fontWeight: state.isSelected ? "bold" : "normal",
+        padding: "16px",
         "&:hover": {
             background: "var(--accent-color)"
         }

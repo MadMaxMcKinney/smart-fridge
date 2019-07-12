@@ -55,12 +55,18 @@ app.put('/food', (req, res, next) => {
 
 // Delete the food item with the given id
 app.delete('/food', (req, res, next) => {
-    res.send(`Deleted item with id: ${req.query.id}`);
-    db.get('food')
+    // Search from both perishables and nonPerishables. TODO: Prevent this double search, align to one database search
+    db.get('perishables')
         .remove({
             id: req.query.id,
         })
         .write();
+    db.get('nonPerishables')
+        .remove({
+            id: req.query.id,
+        })
+        .write();
+    res.send(`Deleted item with id: ${req.query.id}`);
 });
 
 // To the server to listen on port 8080.
