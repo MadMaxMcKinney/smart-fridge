@@ -9,6 +9,7 @@ import Button from "../components/Button";
 import { PageHeader, PageDescription, Label } from "../components/Typography";
 import {FoodContext} from '../context/FoodContext';
 import { toast } from 'react-toastify';
+import moment from "moment";
 
 const AddPage = () => {
 
@@ -29,15 +30,33 @@ const AddPage = () => {
         { value: "perishables", label: "Perishable" },
         { value: "nonPerishables", label: "Non-Perishable" }
     ];
-
-    const validateForm = () => {};
+    
+    /**
+     * Check the inputs for validity
+     *
+     */
+    const validateForm = () => {
+        if(name === undefined || name.length === 0) {
+            throw Error("Name can not be empty");
+        }
+        if(expirationDate === undefined || !moment(expirationDate).isValid()) {
+            throw Error("Date is invalid");
+        }
+        if(category === undefined) {
+            throw Error("Category was not selected")
+        }
+    };
 
     /**
      * Adds a new food item via food context and changes back to the home page
      *
      */
-    const handleAddItem = async () => {
+    const handleAddItem = async (e) => {
+        // Prevent default form submit action
+        e.preventDefault();
+
         try {
+            validateForm();
             await addFoodItem(newItem);
             toast(`Successfully added: ${newItem.title}`, {type: toast.TYPE.SUCCESS});
             router.push('/');
@@ -52,7 +71,7 @@ const AddPage = () => {
             <PageDescription>
                 Add a new item to your food supply and get to eatting!
             </PageDescription>
-            <AddForm>
+            <AddForm onSubmit={handleAddItem}>
                 <Label>Food Name</Label>
                 <Input placeholder="Name" onChange={(e) => setName(e.target.value)}/>
 
@@ -67,13 +86,13 @@ const AddPage = () => {
                     onChange={(e) => setCategory(e.value)}
                 />
 
-                <Button onClick={() => handleAddItem()}>Add Item</Button>
+                <Input type="submit" value="Add Item"/>
             </AddForm>
         </Page>
     );
 };
 
-const AddForm = styled.div`
+const AddForm = styled.form`
     margin-top: 32px;
     margin-bottom: 32px;
 
@@ -81,7 +100,7 @@ const AddForm = styled.div`
         margin-bottom: 32px;
     }
 
-    & > ${Button} {
+    & > input[type=submit] {
         margin-top: 56px;
     }
 `;

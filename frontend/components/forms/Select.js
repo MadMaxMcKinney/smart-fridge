@@ -17,12 +17,12 @@ const selectStyles = {
     }),
     option: (provided, state) => ({
         ...provided,
-        background: "transparent",
+        background: state.isFocused ? "var(--accent-color)" : "transparent",
         fontWeight: state.isSelected ? "bold" : "normal",
         padding: "16px",
         "&:hover": {
             background: "var(--accent-color)"
-        }
+        },
     }),
     placeholder: provided => ({
         ...provided,

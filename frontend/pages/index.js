@@ -54,6 +54,8 @@ const FloatingActionButton = styled.a`
     margin-top: 150px;
     width: 64px;
     height: 64px;
+    border: 1px solid;
+    border-color: transparent;
     background: var(--accent-color);
     color: var(--white-color);
     display: flex;
@@ -65,7 +67,15 @@ const FloatingActionButton = styled.a`
 
     &:hover {
         background: var(--dark-blue-color);
+        border-color: transparent;
         color: white;
+        outline: none;
+    }
+
+    &:focus, &:active {
+        background: var(--dark-blue-color);
+        outline: none;
+        border-color: var(--accent-color);
     }
 `;
 

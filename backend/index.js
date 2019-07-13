@@ -48,7 +48,7 @@ app.put('/food', (req, res, next) => {
         res.send(`Successfully added: ${title} in ${category}`);
     } else {
         res.status(404).send(
-            `Could not add item ${title} because ${category} category does not exist`
+            `Could not add item because no category was selected`
         );
     }
 });
