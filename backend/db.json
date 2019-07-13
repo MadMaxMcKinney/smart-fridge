@@ -5,26 +5,14 @@
       "expDate": "7/15/2019",
       "category": "perishables",
       "id": "1cl9NXnSVXC"
-    },
-    {
-      "title": "Eggs",
-      "expDate": "8/1/2019",
-      "category": "perishables",
-      "id": "byiECuiDzvU"
-    },
-    {
-      "title": "Test 3",
-      "expDate": "10/1/2019",
-      "category": "perishables",
-      "id": "6PYVUXGXF1X"
     }
   ],
   "nonPerishables": [
     {
-      "title": "Test 1",
-      "expDate": "9/2/2019",
+      "title": "A new item",
+      "expDate": "9/10/2019",
       "category": "nonPerishables",
-      "id": "7HzfxhCJ5gs"
+      "id": "OQIlX3Avo8O"
     }
   ]
 }

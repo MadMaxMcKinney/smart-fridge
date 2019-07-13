@@ -4,6 +4,7 @@ import propTypes from "prop-types";
 import { useState, useContext } from "react";
 import {FoodContext} from '../context/FoodContext';
 import moment from 'moment';
+import {MdDeleteForever} from 'react-icons/md';
 
 const ListItem = (props) => {
     const [isSelected, setIsSelected] = useState(false);
@@ -32,7 +33,7 @@ const ListItem = (props) => {
                 </ListItemDate>
             ) : (
                 <ListItemDelete onClick={() => handleDeleteClick(props.id)}>
-                    <p>X</p>
+                    <MdDeleteForever color="var(--red-color)" size="30px"/>
                 </ListItemDelete>
             )}
         </ListItemContainer>
@@ -57,7 +58,13 @@ const ListItemName = styled.p``;
 
 const ListItemDate = styled.p``;
 
-const ListItemDelete = styled.div``;
+const ListItemDelete = styled.div`
+    transition: all 0.3s;
+    cursor: pointer;
+    &:hover {
+        opacity: 0.7;
+    }
+`;
 
 ListItem.propTypes = {
     title: propTypes.string,
