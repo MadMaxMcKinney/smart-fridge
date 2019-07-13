@@ -8,6 +8,7 @@ import selectStyles from "../components/forms/Select";
 import Button from "../components/Button";
 import { PageHeader, PageDescription, Label } from "../components/Typography";
 import {FoodContext} from '../context/FoodContext';
+import { toast } from 'react-toastify';
 
 const AddPage = () => {
 
@@ -36,8 +37,13 @@ const AddPage = () => {
      *
      */
     const handleAddItem = async () => {
-        await addFoodItem(newItem);
-        router.push('/');
+        try {
+            await addFoodItem(newItem);
+            toast(`Successfully added: ${newItem.title}`, {type: toast.TYPE.SUCCESS});
+            router.push('/');
+        } catch (error) {
+            toast(`${error}`, {type: toast.TYPE.ERROR});
+        }
     }
 
     return (

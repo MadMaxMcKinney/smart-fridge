@@ -5,6 +5,8 @@
 import React from 'react';
 import App, { Container } from 'next/app';
 import {FoodContextProvider} from '../context/FoodContext';
+import {ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
@@ -25,6 +27,7 @@ class MyApp extends App {
             <Container>
                 <Component {...pageProps} />
             </Container>
+            <ToastContainer position={toast.POSITION.BOTTOM_CENTER}/>
         </FoodContextProvider>
     );
   }

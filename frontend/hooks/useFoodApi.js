@@ -31,7 +31,7 @@ export const useFoodApi = (initUrl) => {
             setFoodList(foodJson);
             setIsLoading(false);
         } catch(error) {
-            console.log(error);
+            throw Error(error);
         }
     }
 
@@ -42,12 +42,17 @@ export const useFoodApi = (initUrl) => {
      * @param {*} newItem
      */
     const addFoodItem = async newItem => {
-        await fetch(
+        let res = await fetch(
             `${url}/food?title=${newItem.title}&expDate=${newItem.expDate}&category=${newItem.category}`,
             {
                 method: "PUT"
             }
         );
+        // If the response is not okay send the error message from the sever
+        if (!res.ok) {
+            let text = await res.text();
+            throw Error(text);
+        }
         fetchData();
     };
 
@@ -57,12 +62,17 @@ export const useFoodApi = (initUrl) => {
      * @param {*} itemID
      */
     const deleteFoodItem = async itemID => {
-        await fetch(
+        let res = await fetch(
             `${url}/food?id=${itemID}`,
             {
                 method: "DELETE"
             }
         );
+        // If the response is not okay send the error message from the sever
+        if (!res.ok) {
+            let text = await res.text();
+            throw Error(text);
+        }
         fetchData();
     };
 

@@ -5,6 +5,7 @@ import { useState, useContext } from "react";
 import {FoodContext} from '../context/FoodContext';
 import moment from 'moment';
 import {MdDeleteForever} from 'react-icons/md';
+import {toast} from 'react-toastify';
 
 const ListItem = (props) => {
     const [isSelected, setIsSelected] = useState(false);
@@ -15,8 +16,14 @@ const ListItem = (props) => {
         setIsSelected(!isSelected);
     }
 
-    const handleDeleteClick = (itemID) => {
-        deleteFoodItem(itemID);
+    const handleDeleteClick = (title, itemID) => {
+        // Call the food context and delete the given food item with ID
+        try {
+            deleteFoodItem(itemID);
+            toast(`Successfully deleted: ${title}`, {type: toast.TYPE.SUCCESS});
+        } catch(error) {
+            toast(error, {type: toast.TYPE.ERROR});
+        }
     }
 
     return (
@@ -32,7 +39,7 @@ const ListItem = (props) => {
                         .fromNow()}
                 </ListItemDate>
             ) : (
-                <ListItemDelete onClick={() => handleDeleteClick(props.id)}>
+                <ListItemDelete onClick={() => handleDeleteClick(props.title, props.id)}>
                     <MdDeleteForever color="var(--red-color)" size="30px"/>
                 </ListItemDelete>
             )}
