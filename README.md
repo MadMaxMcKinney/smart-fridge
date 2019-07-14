@@ -1,10 +1,12 @@
 # Smart Fridge
-![Logo](https://www.dropbox.com/s/bknijw5wee6ctas/smart-fridge-logo.png?raw=1)
+![Logo](../assets/smart-fridge-logo.png?raw=true)
 
 Smart Fridge is a web based application designed to collect and organize useful information related to home kitchens / utilities. Featuring a responsive and touch friendly UI it can easily be integrated into many IoT solutions in the home.
 
 ## Screenshots
+![Home](../assets/Home.png?raw=true)
 
+![Add](../assets/Add.png?raw=true)
 
 ## Running locally
 
