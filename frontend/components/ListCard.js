@@ -17,7 +17,7 @@ const ListCard = props => {
                 {props.data.length > 0 &&
                     props.data.map(foodItem => {
                         return (
-                            <ListItem key={foodItem.id} title={foodItem.title} expDate={foodItem.expDate} id={foodItem.id}/>
+                            <ListItem key={foodItem.id} title={foodItem.title} expDate={foodItem.expDate} id={foodItem.id} kind={props.kind}/>
                         );
                     })}
             </ListCardContent>

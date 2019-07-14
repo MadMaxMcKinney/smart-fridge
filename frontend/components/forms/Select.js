@@ -2,7 +2,8 @@ const selectStyles = {
     container: provided => ({
         ...provided,
         width: "100%",
-        maxWidth: "400px"
+        maxWidth: "400px",
+        marginBottom: "32px"
     }),
     control: (provided, state) => ({
         ...provided,

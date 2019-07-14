@@ -33,10 +33,10 @@ const ListItem = (props) => {
         >
             <ListItemName>{props.title}</ListItemName>
             {!isSelected ? (
+                // Show the date only if the list item is a perishable
+                props.kind === "perishables" && 
                 <ListItemDate>
-                    {moment(props.expDate)
-                        .endOf("day")
-                        .fromNow()}
+                    {moment(props.expDate).endOf("day").fromNow()}
                 </ListItemDate>
             ) : (
                 <ListItemDelete onClick={() => handleDeleteClick(props.title, props.id)}>
@@ -75,7 +75,8 @@ const ListItemDelete = styled.div`
 
 ListItem.propTypes = {
     title: propTypes.string,
-    expDate: propTypes.string
+    expDate: propTypes.string,
+    kind: propTypes.oneOf("perishables", "nonPerishables")
 }
 
 export default ListItem;

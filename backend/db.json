@@ -17,14 +17,26 @@
       "expDate": "7/31/19",
       "category": "perishables",
       "id": "F9O-_TOKdYT"
+    },
+    {
+      "title": "Egggsss",
+      "expDate": "1/1/1",
+      "category": "perishables",
+      "id": "aOGGzg3pPAT"
     }
   ],
   "nonPerishables": [
     {
-      "title": "A new item",
-      "expDate": "9/10/2019",
+      "title": "test with no date",
+      "expDate": "undefined",
       "category": "nonPerishables",
-      "id": "OQIlX3Avo8O"
+      "id": "sQ5MNn36na-"
+    },
+    {
+      "title": "No Date",
+      "expDate": "undefined",
+      "category": "nonPerishables",
+      "id": "zT2t03zAK88"
     }
   ]
 }

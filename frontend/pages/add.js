@@ -15,6 +15,7 @@ const AddPage = () => {
 
     const [name, setName] = useState();
     const [expirationDate, setExpirationDate] = useState();
+    const [requireDate, setRequireDate] = useState(true);
     const [category, setCategory] = useState();
     const router = useRouter();
     const [foodList, addFoodItem, deleteFoodItem] = useContext(FoodContext);
@@ -39,11 +40,12 @@ const AddPage = () => {
         if(name === undefined || name.length === 0) {
             throw Error("Name can not be empty");
         }
-        if(expirationDate === undefined || !moment(expirationDate).isValid()) {
-            throw Error("Date is invalid");
-        }
         if(category === undefined) {
             throw Error("Category was not selected")
+        }
+        // If the date is required then make sure it's defined and is a valid date structure
+        if(requireDate && (expirationDate === undefined || !moment(expirationDate).isValid())) {
+            throw Error("Date is invalid");
         }
     };
 
@@ -65,6 +67,14 @@ const AddPage = () => {
         }
     }
 
+    const handleCategoryChange = (e) => {
+        if(e.value === "perishables")
+            setRequireDate(true);
+            setCategory(e.value)
+        if(e.value === "nonPerishables")
+            setRequireDate(false);
+    }
+
     return (
         <Page>
             <PageHeader>New Item</PageHeader>
@@ -75,16 +85,16 @@ const AddPage = () => {
                 <Label>Food Name</Label>
                 <Input placeholder="Name" onChange={(e) => setName(e.target.value)}/>
 
-                <Label>Expiration Date</Label>
-                <Input placeholder="0/0/0" onChange={(e) => setExpirationDate(e.target.value)}/>
-
                 <Label>Food Type</Label>
                 <Select
                     options={foodTypes}
                     styles={selectStyles}
                     isSearchable={false}
-                    onChange={(e) => setCategory(e.value)}
+                    onChange={(e) => handleCategoryChange(e)}
                 />
+
+                <Label>Expiration Date</Label>
+                <Input placeholder="0/0/0" onChange={(e) => setExpirationDate(e.target.value)} disabled={!requireDate}/>
 
                 <Input type="submit" value="Add Item"/>
             </AddForm>

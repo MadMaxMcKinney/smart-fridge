@@ -13,15 +13,20 @@ const Input = styled.input`
     font-size: 14px;
     transition: all 0.3s;
 
-    &:hover,
-    &:active,
-    &:focus {
+    &:hover:enabled,
+    &:active:enabled,
+    &:focus:enabled {
         border-color: var(--accent-color);
         outline: none;
     }
 
     &::placeholder {
         color: #707480;
+    }
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
     }
 
     &[type=submit] {
